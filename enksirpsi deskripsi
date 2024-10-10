@@ -1,0 +1,43 @@
+def encrypt(text, shift):
+    result = ""
+    
+    # Melakukan iterasi terhadap setiap karakter dalam teks
+    for char in text:
+        if char.isalpha():  # Jika karakter adalah huruf
+            shift_base = 65 if char.isupper() else 97
+            # Shift karakter dan tambahkan ke hasil
+            result += chr((ord(char) - shift_base + shift) % 26 + shift_base)
+        else:
+            result += char  # Jika bukan huruf, biarkan tetap sama
+    
+    return result
+
+def decrypt(text, shift):
+    return encrypt(text, -shift)
+
+def caesar_cipher():
+    while True:
+        print("\nSelamat datang di program Caesar Cipher!")
+        print("Pilih opsi:")
+        print("1: Enkripsi")
+        print("2: Dekripsi")
+        print("3: Keluar")
+        
+        choice = input("Masukkan pilihan Anda (1/2/3): ")
+
+        if choice == '1':
+            text = input("Masukkan teks yang ingin dienkripsi: ")
+            shift = int(input("Masukkan nilai pergeseran (shift): "))
+            print("Hasil enkripsi:", encrypt(text, shift))
+        elif choice == '2':
+            text = input("Masukkan teks yang ingin didekripsi: ")
+            shift = int(input("Masukkan nilai pergeseran (shift): "))
+            print("Hasil dekripsi:", decrypt(text, shift))
+        elif choice == '3':
+            print("Terima kasih telah menggunakan program ini. Sampai jumpa!")
+            break  # Keluar dari loop dan program berakhir
+        else:
+            print("Pilihan tidak valid, silakan coba lagi.")
+
+# Memanggil fungsi untuk menjalankan program
+caesar_cipher()
